@@ -34,7 +34,7 @@ const updateUI = (data) => {
     let timeSrc = weather.IsDayTime ? 'img/day.svg' : 'img/night.svg';
 
     // same as ternary above
-    
+
     // if (weather.IsDayTime) {
     //     timeSrc = 'img/day.svg';
     // } else {
@@ -73,6 +73,15 @@ cityForm.addEventListener('submit', e => {
     // update the ui with new city
     updateCity(city)
         .then(data => updateUI(data))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 
-})
+    // set local storage
+    localStorage.setItem('city', city);
+
+});
+
+if (localStorage.getItem('city')) {
+    updateCity(localStorage.getItem("city"))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+}
