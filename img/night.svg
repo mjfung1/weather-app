@@ -3,7 +3,42 @@
     <clipPath id="clip-night">
       <rect width="414" height="415"/>
     </clipPath>
+    <style type="text/css"><![CDATA[
+    #Path_4, 
+    #Path_4-2, 
+    #Path_4-3, 
+    #Path_4-4, 
+    #Path_4-5, 
+    #Path_4-6, 
+    #Path_4-7, 
+    #Path_4-8, 
+    #Path_4-9, 
+    #Path_4-10, 
+    #Path_4-11 {
+      -webkit-animation: background 1s cubic-bezier(1,0,0,1) infinite;
+      animation: background 1s cubic-bezier(1,0,0,1) infinite;  
+    }
+
+
+    @-webkit-keyframes background {
+      0% { fill: #f99; }
+      33% { fill: #9f9; }  
+      67% { fill: #99f; }
+      100% { fill: #ffd900; }
+    }
+
+    @keyframes background {
+      0% { fill: #f99; }
+      33% { fill: #9f9; }  
+      67% { fill: #99f; }
+      100% { fill: #ffd900; }
+    }
+
+    ]]>
+    </style>
   </defs>
+
+
   <g id="night" clip-path="url(#clip-night)">
     <rect width="414" height="415" fill="#243046"/>
     <path id="cloud" d="M178.116,53.739a41.653,41.653,0,0,0-8.258.826,34.058,34.058,0,0,0-47.7-24.214A45.459,45.459,0,0,0,36.7,61.377a37.9,37.9,0,0,0,1.139,75.772h140.28a41.7,41.7,0,1,0,0-83.41Zm0,0" transform="translate(20.001 190.608)" fill="#fff" opacity="0.06"/>
