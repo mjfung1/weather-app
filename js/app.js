@@ -100,7 +100,7 @@ async function getLocation() {
 async function showPosition(position) {
     const {latitude, longitude} = position.coords;
     const key = 'NihuSR8lby2VMupERIxezrl5VPRl2mVK';
-    const base = "https://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
+    const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
     const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
     // console.log(position);
     const response = await fetch(base + query);
