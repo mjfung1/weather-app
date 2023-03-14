@@ -9,14 +9,9 @@ const icon = document.querySelector('.icon img');
 
 const updateUI = (data) => {
     
-    // console.log(data)
-    // const cityDets = data.cityDets;
-    // const weather = data.weather;
-
     // destructure properties => refactored from above
     const {cityDets, weather} = data;
 
-    // console.log(weather);
     // update details template
     details.innerHTML = `
         <h5 class="my-3">${cityDets.EnglishName}</h5>
@@ -56,6 +51,7 @@ const updateUI = (data) => {
 const updateCity = async (city) => {
     
     const cityDets = await getCity(city);
+
     const weather = await getWeather(cityDets.Key);
 
     return { cityDets, weather };
@@ -84,4 +80,40 @@ if (localStorage.getItem('city')) {
     updateCity(localStorage.getItem("city"))
         .then(data => updateUI(data))
         .catch(err => console.log(err));
+} else {
+
+    if (card.classList.contains('d-none')) {
+        card.classList.remove('d-none')
+    }
+    getLocation()
 }
+
+
+
+async function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } 
+}
+
+
+async function showPosition(position) {
+    const {latitude, longitude} = position.coords;
+    const key = 'NihuSR8lby2VMupERIxezrl5VPRl2mVK';
+    const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
+    const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
+    // console.log(position);
+    const response = await fetch(base + query);
+    const data = await response.json();
+    console.log({resp: data.Key},{ latitude, longitude});
+    updateCity(data.Key)
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+
+    // set local storage
+    localStorage.setItem('city', data.Key);
+}
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
