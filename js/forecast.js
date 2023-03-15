@@ -29,7 +29,7 @@ const getCity = async (city) => {
     // fetches data for API & convert to json
     
     try {
-        const response = await fetch(base + query);
+        const response = await fetch(base + query, { mode: "no-cors"} );
         const data = await response.json();
 
         return data[0];
