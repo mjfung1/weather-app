@@ -48,14 +48,15 @@ const updateCity = async (city) => {
     
     try {
         const cityDets = await getCity(city);
-
+        
         if (!cityDets) {
             localStorage.removeItem('city');
-            alert("API OUT OF LIMIT");
+            alert("SORRY, API OUT OF LIMIT. TRY AGAIN LATER");
             throw new Error("API OUT OF LIMIT");
+           
         }
         console.log({cityDets});
-
+        
         const weather = await getWeather(cityDets.Key);
     
         return { cityDets, weather };
@@ -135,3 +136,4 @@ async function showPosition(position) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
