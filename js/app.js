@@ -51,6 +51,7 @@ const updateCity = async (city) => {
 
         if (!cityDets) {
             localStorage.removeItem('city');
+            alert("API OUT OF LIMIT");
             throw new Error("API OUT OF LIMIT");
         }
         console.log({cityDets});
