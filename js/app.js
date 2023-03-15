@@ -48,7 +48,13 @@ const updateCity = async (city) => {
     
     try {
         const cityDets = await getCity(city);
-    
+
+        if (!cityDets) {
+            localStorage.removeItem('city');
+            throw new Error("API OUT OF LIMIT");
+        }
+        console.log({cityDets});
+
         const weather = await getWeather(cityDets.Key);
     
         return { cityDets, weather };
@@ -91,6 +97,8 @@ if (localStorage.getItem('city')) {
 
 
 
+
+
 async function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -107,7 +115,6 @@ async function showPosition(position) {
         const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
     
         const response = await fetch(base + query, {mode:"no-cors"});
-        
         if (!response.ok) throw new Error("Something went wrong");
 
         const data = await response.json();
