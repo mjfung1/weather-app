@@ -44,11 +44,17 @@ const updateUI = (data) => {
 
 const updateCity = async (city) => {
     
-    const cityDets = await getCity(city);
+    
+    try {
+        const cityDets = await getCity(city);
+    
+        const weather = await getWeather(cityDets.Key);
+    
+        return { cityDets, weather };
 
-    const weather = await getWeather(cityDets.Key);
-
-    return { cityDets, weather };
+    } catch (err) {
+        console.log({err});
+    }
 
 };
 
@@ -92,20 +98,26 @@ async function getLocation() {
 
 
 async function showPosition(position) {
-    const {latitude, longitude} = position.coords;
-    const key = 'NihuSR8lby2VMupERIxezrl5VPRl2mVK';
-    const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
-    const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
+    
+    try {
+        const {latitude, longitude} = position.coords;
+        const key = 'NihuSR8lby2VMupERIxezrl5VPRl2mVK';
+        const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
+        const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
+    
+        const response = await fetch(base + query);
+        const data = await response.json();
+    
+        updateCity(data.Key)
+            .then(data => updateUI(data))
+            .catch(err => console.log(err));
+    
+        // set local storage
+        localStorage.setItem('city', data.Key);
 
-    const response = await fetch(base + query);
-    const data = await response.json();
-
-    updateCity(data.Key)
-        .then(data => updateUI(data))
-        .catch(err => console.log(err));
-
-    // set local storage
-    localStorage.setItem('city', data.Key);
+    }catch (err) {
+        console.log({err});
+    }
 }
 
 $(function () {
