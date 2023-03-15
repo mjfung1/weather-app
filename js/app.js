@@ -8,6 +8,7 @@ const time = document.querySelector('.time');
 const icon = document.querySelector('.icon img');
 
 const updateUI = (data) => {
+    if (!data) return;
     
     // destructure properties => refactored from above
     const {cityDets, weather} = data;
