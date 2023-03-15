@@ -30,12 +30,6 @@ const updateUI = (data) => {
 
     // same as ternary above
 
-    // if (weather.IsDayTime) {
-    //     timeSrc = 'img/day.svg';
-    // } else {
-    //     timeSrc = 'img/night.svg'
-    // }
-
     time.setAttribute('src', timeSrc);
 
 
@@ -102,10 +96,10 @@ async function showPosition(position) {
     const key = 'NihuSR8lby2VMupERIxezrl5VPRl2mVK';
     const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
     const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
-    // console.log(position);
+
     const response = await fetch(base + query);
     const data = await response.json();
-    console.log({resp: data.Key},{ latitude, longitude});
+
     updateCity(data.Key)
         .then(data => updateUI(data))
         .catch(err => console.log(err));

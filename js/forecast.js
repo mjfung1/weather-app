@@ -9,7 +9,6 @@ const getWeather = async (id) => {
     const response = await fetch(base + query);
     const data = await response.json();
     
-    console.log("getweather", data[0])
     return data[0];
 
 
@@ -27,7 +26,7 @@ const getCity = async (city) => {
     try {
         const response = await fetch(base + query);
         const data = await response.json();
-        console.log("from getcity", data[0]);
+
         return data[0];
         
     } catch (err) {
@@ -36,12 +35,3 @@ const getCity = async (city) => {
 
 };
 
-
-// testing
-// getCity('caracas').then(data => {
-//     return getWeather(data.Key);
-// }).then(data => {
-//     console.log(data);
-// }).catch(err => console.log(err));
-
-// getWeather('329260');
