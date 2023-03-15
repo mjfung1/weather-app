@@ -107,6 +107,9 @@ async function showPosition(position) {
         const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
     
         const response = await fetch(base + query, {mode:"no-cors"});
+        
+        if (!response.ok) throw new Error("Something went wrong");
+
         const data = await response.json();
     
         updateCity(data.Key)
