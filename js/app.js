@@ -116,10 +116,12 @@ async function showPosition(position) {
         const base = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search"
         const query = `?apikey=${key}&q=${latitude + "," + longitude}&language=en-us&details=false&toplevel=false`;
     
-        const response = await fetch(base + query, {mode:"no-cors"});
+        const response = await fetch(base + query);
         if (!response.ok) throw new Error("Something went wrong");
 
         const data = await response.json();
+
+        console.log({data});
     
         updateCity(data.Key)
             .then(data => updateUI(data))

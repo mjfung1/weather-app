@@ -18,7 +18,23 @@ body {
     left: -150px;
     z-index: 23;
   
+
 }
+
+/* accuweather-logo-container {
+    width: 40px;
+    height: 40px;
+} */
+
+.search-form {
+    position: relative;
+}
+
+/* .accuweather-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+} */
 
 .navbar .icons {
     display: flex;

@@ -19,7 +19,7 @@ const getWeather = async (id) => {
 
 };
 
-// http://dataservice.accuweather.com/locations/v1/cities/search?apikey=NihuSR8lby2VMupERIxezrl5VPRl2mVK
+// http://dataservice.accuweather.com/locations/v1/cities/search?apikey=NihuSR8lby2VMupERIxezrl5VPRl2mVK&q=bronx
 // get city information
 const getCity = async (city) => {
 
@@ -29,7 +29,7 @@ const getCity = async (city) => {
     // fetches data for API & convert to json
     
     try {
-        const response = await fetch(base + query, { mode: "no-cors"} );
+        const response = await fetch(base + query);
         const data = await response.json();
 
         return data[0];
